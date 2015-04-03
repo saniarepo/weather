@@ -1,11 +1,15 @@
 <?php
 	require_once('include/common.inc.php');
-		
-	
-		
-	//parseMeteoData();
+				
 	$parser = new Parser(new DbSqlite('weather.sqlite'));
-	$parser->parseStationsDataFile(STATIONS_FILE);
+	
+	//echo "\nParse meteostations data: ";
+	//$parser->parseStationsDataFile(STATIONS_FILE);
+	
+	echo "\nParse meteodata: ";
+	$parser->parseMeteoDataFiles(DATA_DIR);
+	
+	echo "\nDone";
 	
 	
 

@@ -8,3 +8,4 @@
 	require_once('DbSqlite.class.php');
 	require_once('Fs.class.php');	
 	require_once('Util.func.php');
+	require_once('Logger.class.php');

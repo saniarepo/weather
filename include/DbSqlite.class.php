@@ -36,6 +36,7 @@ class DbSqlite implements IStorage
 			$count++;
 			if ($count < $len) $sql .= ',';
 		}
+		$sql .= ')';
 		$this->db->exec($sql);
 		
 		$sql = 'CREATE TABLE IF NOT EXISTS stations(';
@@ -52,11 +53,46 @@ class DbSqlite implements IStorage
 	
 	public function saveMeteoData(array $record)
 	{
-		print_r($record);
+		$sql = 'INSERT INTO meteo (';
+		$count = 0; $len = count($this->meteoRecord);
+		foreach( $this->meteoRecord as $key=>$value)
+		{
+			$sql .= $key;
+			$count++;
+			if ($count < $len) $sql .= ',';
+		}		
+		$sql .= ') VALUES (';
+		$count = 0;
+		foreach( $this->meteoRecord as $key=>$value)
+		{
+			$sql .= $record[$value];
+			$count++;
+			if ($count < $len) $sql .= ',';
+		}
+		$sql .= ')';
+		return $this->db->exec($sql);
 	}
+	
 	public function saveStationData(array $record)
 	{
-		
+		$sql = 'INSERT INTO stations (';
+		$count = 0; $len = count($this->stationRecord);
+		foreach( $this->stationRecord as $key=>$value)
+		{
+			$sql .= $key;
+			$count++;
+			if ($count < $len) $sql .= ',';
+		}		
+		$sql .= ') VALUES (';
+		$count = 0;
+		foreach( $this->stationRecord as $key=>$value)
+		{
+			$sql .= $record[$value];
+			$count++;
+			if ($count < $len) $sql .= ',';
+		}
+		$sql .= ')';
+		return $this->db->exec($sql);
 	}
 
 }

@@ -15,6 +15,9 @@ class Parser implements IParser
 	public function parseMeteoDataFiles($dir)
 	{
 		$files = Fs::getFiles($dir);
+		$full = count($files);
+		$count  = 0;
+		$logger = new Logger();
 		foreach($files as $file)
 		{
 			$rows = Fs::getRows($dir . $file);
@@ -24,6 +27,9 @@ class Parser implements IParser
 				$items = Fs::getItems($row, ' ');
 				$this->storage->saveMeteoData($items);
 			}
+			$count++;
+			if ( $count % 10 == 0 )
+				$logger->progress($count, $full);
 		}
 	}
 	
@@ -33,11 +39,19 @@ class Parser implements IParser
 	public function parseStationsDataFile($file)
 	{
 		$rows = Fs::getRows($file);
+		$full = count($rows);
+		$count  = 0;
+		$logger = new Logger();
 		foreach($rows as $num => $row)
 		{
 			if ( $num == 0 ) continue;
 			$items = Fs::getItems($row, ',');
-			$this->storage->saveStationData($items);
+			if ($this->storage->saveStationData($items))
+			{
+				$count++;
+				if ( $count % 100 == 0 )
+					$logger->progress($count, $full);
+			}
 		}
 	}
 
