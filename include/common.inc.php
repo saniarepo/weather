@@ -1,0 +1,10 @@
+<?php
+	require_once('lib/Http.class.php');
+	require_once('lib/simple_html_dom.php');
+	require_once('conf.php');
+	require_once('IParser.interface.php');
+	require_once('IStorage.interface.php');
+	require_once('Parser.class.php');	
+	require_once('DbSqlite.class.php');
+	require_once('Fs.class.php');	
+	require_once('Util.func.php');
