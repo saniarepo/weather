@@ -1,7 +1,7 @@
 <?php
 	interface IStorage
 	{
-		public function saveMeteoData(array $record);
-		public function saveStationData(array $record);
-		
+		public function save(array $record, $name);
+		public function setModel(array $model);
+		public function flush($name);
 	}

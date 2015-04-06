@@ -4,8 +4,8 @@
 	require_once('conf.php');
 	require_once('IParser.interface.php');
 	require_once('IStorage.interface.php');
-	require_once('Parser.class.php');	
-	require_once('DbSqlite.class.php');
+	require_once('GsodParser.class.php');	
+	require_once('SqliteStorage.class.php');
 	require_once('Fs.class.php');	
 	require_once('Util.func.php');
 	require_once('Logger.class.php');

@@ -1,12 +1,33 @@
 <?php
 
-class Parser implements IParser
+class GsodParser implements IParser
 {	
 	private $storage;
+	
+	private $model = array(
+		'meteo' => array(
+							'stn'  => 0,
+							'wban' => 1,
+							'thedate' => 2,
+							'temperature' => 3,
+							'pressure' => 9,
+							'wind' => 13
+							),
+		'station' => array(
+							'stn'  => 0,
+							'wban' => 1,
+							'lat' => 6,
+							'lng' => 7,
+							'elevation' => 8,
+							'datebegin' => 9,
+							'dateend' => 10	
+							)
+	);
 	
 	public function __construct(IStorage $storage)
 	{
 		$this->storage = $storage;
+		$this->storage->setModel($this->model);
 	}
 	
 	/**
@@ -25,8 +46,9 @@ class Parser implements IParser
 			{
 				if($num == 0) continue;
 				$items = Fs::getItems($row, ' ');
-				$this->storage->saveMeteoData($items);
+				$this->storage->save($items, 'meteo');
 			}
+			$this->storage->flush('meteo');
 			$count++;
 			if ( $count % 10 == 0 )
 				$logger->progress($count, $full);
@@ -46,13 +68,14 @@ class Parser implements IParser
 		{
 			if ( $num == 0 ) continue;
 			$items = Fs::getItems($row, ',');
-			if ($this->storage->saveStationData($items))
+			if ($this->storage->save($items, 'station'))
 			{
 				$count++;
 				if ( $count % 100 == 0 )
 					$logger->progress($count, $full);
 			}
 		}
+		$this->storage->flush('station');
 	}
 
 }
