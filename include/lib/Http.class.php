@@ -60,12 +60,48 @@ class Http
         return $url;
     }
 
-    /**
+    
+	 /**
+	 * function download 
+	 * @param string $url Url
+	 * @param string $filename filename for write
+	 * @return bool true or false
+	 */
+    public static function download( $url, $filename )
+    {
+        $result     = false;
+        $curlHandle = curl_init( $url );
+        if ( $curlHandle === false )
+        {
+            return false;
+        }
+       
+		if ( !($f = @fopen( $filename, 'w' ))) return false;
+		
+        curl_setopt( $curlHandle, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt( $curlHandle, CURLOPT_FOLLOWLOCATION, 1 );
+		curl_setopt( $curlHandle, CURLOPT_NOPROGRESS, 0 );
+		curl_setopt( $curlHandle, CURLOPT_FILE, $f );
+        
+		curl_exec( $curlHandle );
+        $info    = curl_getinfo( $curlHandle );
+        $error   = curl_error( $curlHandle );
+       
+        if ( ! curl_errno( $curlHandle ) )
+        {
+            $result = true;
+        }
+		fclose($f);
+        curl_close( $curlHandle );
+        return $result;
+    } //end func
+	
+	/**
      * function GetContentFromUrl get content as string from given url
      * @param string $url Url
      * @return string $content | false Content or false if fail
      */
-    public static function GetContentFromUrl( $url )
+    public static function GetContentFromUrl( $url, $filename )
     {
         $result     = false;
         $curlHandle = curl_init( $url );
@@ -113,6 +149,7 @@ class Http
 
         return ( $result ) ? $content : false;
     } //end func
+	
 
     /**
      * function GetPathFromUrl extract path from url
@@ -171,7 +208,7 @@ class Http
      * @param boolean $typePost GET request or POST request
      * @param  array $headers Array of headers string ( "Name: value" ) 
      * @param  string $post POST-data string
-     * @param  string $fileCookie File for save cookie
+     * @param  string $referer Referef string
      * @return string $content | false Content or false if fail
      */
      public static function SendRequest( $url, $typePost = false, $headers = array(), $post = 'op=0', $referer = '' )
@@ -231,6 +268,8 @@ class Http
 
         return ( $result ) ? $content : false;
      }//end func
+	 
+	 
      
      /**
      * function ClearSession Clear cookie file
