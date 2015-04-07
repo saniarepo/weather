@@ -1,15 +1,19 @@
 <?php
 	require_once('include/common.inc.php');
 				
-	$year = 2014;
-	$parser = new GsodParser(new SqliteStorage('weather.'.$year.'.sqlite'));
+	const START_YEAR = 1980;
+	const END_YEAR = 2014;
 	
-	echo "\nParse meteostations data: ";
-	$parser->parseStationsDataFile(STATIONS_FILE);
-	
-	echo "\nParse meteodata: ";
-	$parser->parseMeteoDataFiles(DATA_DIR . $year . '/');
-	
+	for ( $year = START_YEAR; $year <= END_YEAR; $year++ )
+	{
+		$parser = new GsodParser(new SqliteStorage('weather.'.$year.'.sqlite'));
+		
+		echo "\nParse meteostations data for ".$year.": ";
+		$parser->parseStationsDataFile(STATIONS_FILE);
+		
+		echo "\nParse meteo data for ".$year.": ";
+		$parser->parseMeteoDataFiles(DATA_DIR . $year . '/');
+	}
 	echo "\nDone";
 	
 	

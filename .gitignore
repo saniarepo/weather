@@ -1,2 +1,3 @@
 console.bat
 *.sqlite
+*.sqlite-journal
