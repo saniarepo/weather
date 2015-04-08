@@ -12,6 +12,8 @@ class SqliteStorage implements IStorage
 	{
 		$this->file = $file;
 		$this->db = new SQLite3($file);
+		$sql = "PRAGMA journal_mode = PERSIST";
+		$this->db->exec($sql);
 	}
 
 	public function setModel(array $model)
