@@ -1,7 +1,7 @@
 <?php
 	require_once('include/common.inc.php');
 				
-	const START_YEAR = 2004;
+	const START_YEAR = 2008;
 	const END_YEAR = 2014;
 	
 	for ( $year = START_YEAR; $year <= END_YEAR; $year++ )

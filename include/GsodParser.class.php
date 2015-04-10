@@ -16,11 +16,11 @@ class GsodParser implements IParser
 		'station' => array(
 							'stn'  => 0,
 							'wban' => 1,
-							'lat' => 6,
-							'lng' => 7,
-							'elevation' => 8,
-							'datebegin' => 9,
-							'dateend' => 10	
+							'lat' => 5,
+							'lng' => 6,
+							'elevation' => 7,
+							'datebegin' => 8,
+							'dateend' => 9	
 							)
 	);
 	
