@@ -11,8 +11,8 @@ server.listen(port,function(){
 
 app.use(express.static(__dirname+'/public'));
 
-/*маршрут для получения погоды в одной точке*/
-/*принимает запрос вида http://site1.loc:8000/weather/?date=20140116&lat=56.4&lng=48.16*/
+/*РјР°СЂС€СЂСѓС‚ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РїРѕРіРѕРґС‹ РІ РѕРґРЅРѕР№ С‚РѕС‡РєРµ*/
+/*РїСЂРёРЅРёРјР°РµС‚ Р·Р°РїСЂРѕСЃ РІРёРґР° http://site1.loc:8000/weather/?date=20140116&lat=56.4&lng=48.16*/
 app.get('/weather',function(req,res){
     var date = req.query.date;
 	var lat = req.query.lat;
@@ -27,8 +27,8 @@ app.get('/weather',function(req,res){
 });
 
 
-/*маршрут для получения погоды в нескольких точках*/
-/*принимает запрос вида http://site1.loc:8080/weather/multi/?date=20140116&dots=56.12,47.67|58.17,49.11|54.13,48.32*/
+/*РјР°СЂС€СЂСѓС‚ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РїРѕРіРѕРґС‹ РІ РЅРµСЃРєРѕР»СЊРєРёС… С‚РѕС‡РєР°С…*/
+/*РїСЂРёРЅРёРјР°РµС‚ Р·Р°РїСЂРѕСЃ РІРёРґР° http://site1.loc:8080/weather/multi/?date=20140116&dots=56.12,47.67|58.17,49.11|54.13,48.32*/
 app.get('/weather/multi',function(req,res){
 	var date = JSON.parse(req.query.date);
 	var dots = JSON.parse(req.query.dots);
