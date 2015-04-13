@@ -91,7 +91,7 @@
 		if ($i < $count -1) $sql .= " OR ";
 	}
 	$sql .= ")";
-	//echo $sql;exit();
+	echo $sql."<br/><hr/>";//exit();
 	$result = $db->query($sql);		
 	$response = '{';
 	$response .= 'result:ok,data:[';

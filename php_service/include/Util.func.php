@@ -17,6 +17,7 @@
 	**/
 	function node2ms($node)
 	{
+		if ($node == 9999.9) return 'n/a';
 		return 0.514 * $node;
 	}
 	
@@ -27,6 +28,7 @@
 	**/
 	function mb2atm($mbar)
 	{
+		if ($mbar == 9999.9) return 'n/a';
 		return 0.000986923 * $mbar;
 	}
 	

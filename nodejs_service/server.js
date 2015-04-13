@@ -30,8 +30,8 @@ app.get('/weather',function(req,res){
 /*маршрут для получения погоды в нескольких точках*/
 /*принимает запрос вида http://site1.loc:8080/weather/multi/?date=20140116&dots=56.12,47.67|58.17,49.11|54.13,48.32*/
 app.get('/weather/multi',function(req,res){
-	var date = JSON.parse(req.query.date);
-	var dots = JSON.parse(req.query.dots);
+	var date = req.query.date;
+	var dots = req.query.dots;
 	time.start();
 	weather.getWeatherMulti(date, dots, function(result){
 		console.log('Executing time: '+time.stop());
